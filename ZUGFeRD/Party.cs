@@ -44,6 +44,14 @@ namespace s2industries.ZUGFeRD
       public string ContactName { get; set; }
 
       /// <summary>
+      /// A name by which the
+      /// Party is known, other
+      /// than the Party name above (also
+      /// known as Business name)
+      /// </summary>      
+      public string TradingName { get; set; }
+
+      /// <summary>
       /// City, not including postcode (separate property)
       /// </summary>   
       public string City { get; set; }
@@ -62,6 +70,24 @@ namespace s2industries.ZUGFeRD
       /// Street name and number
       /// </summary>
       public string Street { get; set; }
+
+      /// XRechnung 2.1
+      /// <summary>
+      /// An additional address
+      /// line in an address that
+      /// can be used to give
+      /// further details supplementing the main line.
+      /// </summary>
+      public string AddressLine2 { get; set; }
+
+      /// XRechnung 2.1
+      /// <summary>
+      /// An additional address
+      /// line in an address that
+      /// can be used to give
+      /// further details supplementing the main line.
+      /// </summary>
+      public string AddressLine3 { get; set; }
       public GlobalID GlobalID { get; set; }
    }
 }

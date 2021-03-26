@@ -75,6 +75,16 @@ namespace s2industries.ZUGFeRD
         SUR,
 
         /// <summary>
+        /// General information.
+        /// </summary>
+        AAI,
+
+        /// <summary>
+        /// Note.
+        /// </summary>
+        ADU,
+
+        /// <summary>
         /// Unknon/ invalid subject code
         /// </summary>
         Unknown

@@ -667,7 +667,7 @@ namespace s2industries.ZUGFeRD
                         if (!String.IsNullOrEmpty(this.Descriptor.PaymentMeans.SEPACreditorIdentifier) && !String.IsNullOrEmpty(this.Descriptor.PaymentMeans.SEPAMandateReference))
                         {
                             Writer.WriteStartElement("ram:ID");
-                            Writer.WriteAttributeString("schemeAgencyID", this.Descriptor.PaymentMeans.SEPACreditorIdentifier);
+                            //Writer.WriteAttributeString("schemeAgencyID", this.Descriptor.PaymentMeans.SEPACreditorIdentifier);
                             Writer.WriteValue(this.Descriptor.PaymentMeans.SEPAMandateReference);
                             Writer.WriteEndElement(); // !ram:ID
                         }
@@ -1066,10 +1066,11 @@ namespace s2industries.ZUGFeRD
                 foreach (Note note in notes)
                 {
                     writer.WriteStartElement("ram:IncludedNote");
-                    if (note.ContentCode != ContentCodes.Unknown)
+                    /* if (note.ContentCode != ContentCodes.Unknown)
                     {
                         writer.WriteElementString("ram:ContentCode", note.ContentCode.EnumToString());
                     }
+                    */
                     writer.WriteElementString("ram:Content", note.Content);
                     if (note.SubjectCode != SubjectCodes.Unknown)
                     {
@@ -1105,6 +1106,13 @@ namespace s2industries.ZUGFeRD
                     writer.WriteElementString("ram:Name", party.Name);
                 }
 
+                if (!String.IsNullOrEmpty(party.TradingName))
+                {
+                    writer.WriteStartElement("ram:SpecifiedLegalOrganization");
+                    writer.WriteElementString("ram:TradingBusinessName", party.TradingName);
+                    writer.WriteEndElement();
+                }
+
                 if (contact != null)
                 {
                     _writeOptionalContact(writer, "ram:DefinedTradeContact", contact, Profile.Extended | Profile.XRechnung1 | Profile.XRechnung);
@@ -1116,9 +1124,18 @@ namespace s2industries.ZUGFeRD
 
                 writer.WriteStartElement("ram:PostalTradeAddress");
                 writer.WriteElementString("ram:PostcodeCode", party.Postcode);
-                writer.WriteElementString("ram:LineOne", string.IsNullOrEmpty(party.ContactName) ? party.Street : party.ContactName);
-                if (!string.IsNullOrEmpty(party.ContactName))
+                // default scheme
+                if (String.IsNullOrEmpty(party.ContactName))
+                {
+                    writer.WriteElementString("ram:LineOne", party.Street);
+                    writer.WriteElementString("ram:LineTwo", party.AddressLine2);
+                    writer.WriteElementString("ram:LineThree", party.AddressLine3);
+                }
+                else
+                {
+                    writer.WriteElementString("ram:LineOne", party.ContactName);
                     writer.WriteElementString("ram:LineTwo", party.Street);
+                }
                 writer.WriteElementString("ram:CityName", party.City);
                 writer.WriteElementString("ram:CountryID", party.Country.EnumToString());
                 writer.WriteEndElement(); // !PostalTradeAddress
@@ -1240,6 +1257,9 @@ namespace s2industries.ZUGFeRD
                 case InvoiceType.InvoiceInformation: return "KEINERECHNUNG";
                 case InvoiceType.Correction:
                 case InvoiceType.CorrectionOld: return "KORREKTURRECHNUNG";
+                case InvoiceType.PartialConstructionInvoice: return "TEILBAURECHNUNG";
+                case InvoiceType.PartialFinalConstructionInvoice: return "teilweise endgültige Baurechnung";
+                case InvoiceType.FinalConstructionInvoice: return "endgültige Baurechnung";
                 case InvoiceType.Unknown: return "";
                 default: return "";
             }

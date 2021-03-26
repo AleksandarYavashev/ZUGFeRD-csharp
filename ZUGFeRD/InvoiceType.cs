@@ -134,6 +134,12 @@ namespace s2industries.ZUGFeRD
         /// </summary>
         Cancellation = 457,
 
+        PartialConstructionInvoice = 875,
+
+        PartialFinalConstructionInvoice = 876,
+
+        FinalConstructionInvoice = 877,
+
         /// <summary>
         /// Unknown (0)
         /// is a fall back for all other cases

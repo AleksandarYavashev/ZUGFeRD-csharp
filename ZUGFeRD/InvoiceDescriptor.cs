@@ -321,31 +321,37 @@ namespace s2industries.ZUGFeRD
         } // !AddNote()        
 
 
-        public void SetBuyer(string name, string postcode, string city, string street, CountryCodes country, string id, GlobalID globalID = null, string receiver = "")
+        public void SetBuyer(string name, string postcode, string city, string street, CountryCodes country, string id, string addressLine2 = "", string addressLine3 = "", string tradingName = "", GlobalID globalID = null, string receiver = "")
         {
             this.Buyer = new Party()
             {
                 ID = id,
                 Name = name,
+                TradingName = tradingName,
                 Postcode = postcode,
                 ContactName = receiver,
                 City = city,
                 Street = street,
+                AddressLine2 = addressLine2,
+                AddressLine3 = addressLine3,
                 Country = country,
                 GlobalID = globalID
             };
         }
 
 
-        public void SetSeller(string name, string postcode, string city, string street, CountryCodes country, string id, GlobalID globalID = null)
+        public void SetSeller(string name, string postcode, string city, string street, CountryCodes country, string id, string addressLine2 = "", string addressLine3 = "", string tradingName = "", GlobalID globalID = null)
         {
             this.Seller = new Party()
             {
                 ID = id,
                 Name = name,
+                TradingName = tradingName,
                 Postcode = postcode,
                 City = city,
                 Street = street,
+                AddressLine2 = addressLine2,
+                AddressLine3 = addressLine3,
                 Country = country,
                 GlobalID = globalID
             };
