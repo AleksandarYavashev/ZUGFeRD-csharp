@@ -664,13 +664,13 @@ namespace s2industries.ZUGFeRD
                         Writer.WriteElementString("ram:TypeCode", this.Descriptor.PaymentMeans.TypeCode.EnumToString());
                         Writer.WriteElementString("ram:Information", this.Descriptor.PaymentMeans.Information);
 
-                        if (!String.IsNullOrEmpty(this.Descriptor.PaymentMeans.SEPACreditorIdentifier) && !String.IsNullOrEmpty(this.Descriptor.PaymentMeans.SEPAMandateReference))
-                        {
-                            Writer.WriteStartElement("ram:ID");
-                            //Writer.WriteAttributeString("schemeAgencyID", this.Descriptor.PaymentMeans.SEPACreditorIdentifier);
-                            Writer.WriteValue(this.Descriptor.PaymentMeans.SEPAMandateReference);
-                            Writer.WriteEndElement(); // !ram:ID
-                        }
+                        //if (!String.IsNullOrEmpty(this.Descriptor.PaymentMeans.SEPACreditorIdentifier) && !String.IsNullOrEmpty(this.Descriptor.PaymentMeans.SEPAMandateReference))
+                        //{
+                        //    Writer.WriteStartElement("ram:ID");
+                        //    Writer.WriteAttributeString("schemeAgencyID", this.Descriptor.PaymentMeans.SEPACreditorIdentifier);
+                        //    Writer.WriteValue(this.Descriptor.PaymentMeans.SEPAMandateReference);
+                        //    Writer.WriteEndElement(); // !ram:ID
+                        //}
                         Writer.WriteEndElement(); // !SpecifiedTradeSettlementPaymentMeans
                     }
                 }
